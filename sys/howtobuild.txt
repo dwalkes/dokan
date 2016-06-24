@@ -8,6 +8,7 @@ You need WDK(Windows Driver Kit). You can get WDK through Microsoft Connect Web 
 http://www.microsoft.com/whdc/DevTools/WDK/WDKpkg.mspx
 https://connect.microsoft.com
 
+The current project requires WDK 7.1.0 or earlier (uses build.exe)
 
 ** Build
 
@@ -19,8 +20,10 @@ When you unzip the dokan source codes, you can get the following folders.
     * \dokan_mount (mount service mounter.exe)
     * \sys (driver dokan.sys) 
 
+When building the \sys directory, ensure the sys\public.h file is setup to include "devioctlh." and not "windows.h"
+
 After installing WDK, launch the build environment from the Start menu. Change the directory to dokan source code.
-Run 갾build /wcbg갿 command within each folders.
+Run build /wcbgh command within each folders.
 
 
 ** Embed a manifest in programs
@@ -33,38 +36,38 @@ Please replace the target names besed on your environment.
 
 ** Install Driver
 
-Now you can get binary programs for example under 갾\dokan\objchk_wlh_x86\i386걤.
+Now you can get binary programs for example under \dokan\objchk_wlh_x86\i386혖혥.
 You need dokan.dll dokan.sys dokanctl.exe mounter.exe mirror.exe
 
 Copy dokan.sys under \Windows\system32\drivers
 Copy dokan.dll under \Windows\system32
 Place dokanctl.exe and mounter.exe in the same folder.
 
-Run 갾dokanctl.exe /i a갿 This means register the driver and the service to Windows.
+Run dokanctl.exe /i ah This means register the driver and the service to Windows.
 You can also do them separately.
-갾dokanctl.exe /i d갿 Install driver.
-갾dokanctl.exe /i s갿 install service.
+dokanctl.exe /i dh Install driver.
+dokanctl.exe /i sh install service.
 
 If you update your driver, you MUST restart your computer after uninstalling previous version.
 
 
 ** Test the driver
 
-You can get version information when you run 갾dokanctl.exe /v갿.
+You can get version information when you run 혖gdokanctl.exe /v혖h.
 
 
 ** Sample program
 
-Run 갾mirror.exe /r c:\ /l m갿. This means mirror C driver under M driver. Can you see M driver?
-To unmount M driver, run 갾dokanctl.exe /u m갿
+Run mirror.exe /r c:\ /l mh. This means mirror C driver under M driver. Can you see M driver?
+To unmount M driver, run dokanctl.exe /u m혖h
 You can see all options of mirror.exe by running mirror.exe without argument.
 
 
 ** Uninstall Driver
 
-갾dokanctl.exe /r a갿 Uninstall both driver and service.
-갾dokanctl.exe /r d갿 Uninstall driver.
-갾dokanctl.exe /r s갿 Uninstall service.
+dokanctl.exe /r ah Uninstall both driver and service.
+dokanctl.exe /r dh Uninstall driver.
+dokanctl.exe /r sh Uninstall service.
 You should restart your computer after uninstalling driver.
 
 
